@@ -1,24 +1,11 @@
 const menuLink = document.getElementsByClassName("menu__link");
-const subMenuLink = document.querySelectorAll(".menu.menu_sub .menu__item .menu__link");
+const menuSub = document.getElementsByClassName("menu menu_sub")
 
-for (let i = 0; i < menuLink.length; i++) {
-    const menuSub = menuLink[i].closest("li").querySelector(".menu_sub");
-    menuLink[i].onclick = function() {
-        if (menuSub != null && menuSub.className === "menu menu_sub") {
-            menuSub.className += " menu_active";
-        } else if (menuSub != null) {
-            menuSub.className = "menu menu_sub";
-        }
-        return false
-    }
-}
+let arrForlink = Array.from(menuLink);
 
-for (let i = 0; i < subMenuLink.length; i++) {
-    subMenuLink[i].onclick = function() {
-        return true;
-    }
-}
-
-for (let i = 0; i < document.getElementsByClassName("super").length; i++) {
-    document.getElementsByClassName("super")[i].onclick = () => { return true; }
-}
+arrForlink.forEach(elem => elem.onclick = () => {
+  if (elem.closest("li").querySelector("ul.menu_sub")) {
+    elem.closest("li").querySelector("ul.menu_sub").classList.toggle("menu_active");
+    return false;
+  }
+}) 
