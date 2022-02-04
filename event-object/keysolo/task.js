@@ -17,14 +17,12 @@ class Game {
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-     */
+
+    document.addEventListener('keyup', (e) => {
+      e.key.toUpperCase() === this.currentSymbol.textContent.toUpperCase() ? this.success() : this.fail();
+    });
   }
+
 
   success() {
     this.currentSymbol.classList.add('symbol_correct');
@@ -41,7 +39,7 @@ class Game {
   }
 
   fail() {
-    if (++this.lossElement.textContent === 5) {
+    if (++this.lossElement.textContent === 3) {
       alert('Вы проиграли!');
       this.reset();
     }
@@ -87,4 +85,3 @@ class Game {
 }
 
 new Game(document.getElementById('game'))
-
